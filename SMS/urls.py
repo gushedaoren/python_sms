@@ -8,6 +8,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-     url(r'^get_sms/(?P<required>\d+)/(?P<optional>.*)/$', include(SendTemplateSMS.sendTemplateSMS)),
+     url(r'^get_sms/', SendTemplateSMS.sendTemplateSMS),
 
 )

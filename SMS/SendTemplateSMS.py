@@ -2,9 +2,11 @@
 
 #coding=utf-8
 
-#-*- coding: UTF-8 -*-  
+#-*- coding: UTF-8 -*-
+from django.http import HttpResponse
 
 from CCPRestSDK import REST
+from rest_framework import generics
 import ConfigParser
 
 #主帐号
@@ -30,9 +32,13 @@ softVersion='2013-12-26';
   # @param datas 内容数据 格式为数组 例如：{'12','34'}，如不需替换请填 ''
   # @param $tempId 模板Id
 
-def sendTemplateSMS(to,datas,tempId):
+def sendTemplateSMS(request):
 
-    
+
+    to="13761398648"
+    datas=""
+    tempId=1
+
     #初始化REST SDK
     rest = REST(serverIP,serverPort,softVersion)
     rest.setAccount(accountSid,accountToken)
@@ -44,8 +50,10 @@ def sendTemplateSMS(to,datas,tempId):
         if k=='templateSMS' :
                 for k,s in v.iteritems(): 
                     print '%s:%s' % (k, s)
+                    HttpResponse('{%s:%s}' % (k, s))
         else:
             print '%s:%s' % (k, v)
+            return HttpResponse('{%s:%s}' % (k, v));
     
    
 #sendTemplateSMS(手机号码,内容数据,模板Id)
