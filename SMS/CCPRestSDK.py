@@ -278,7 +278,9 @@ class REST:
         
             if self.BodyType=='json':
                 #json格式
-                locations = json.loads(data)
+                #locations = json.loads(data)
+
+                locations=data
             else:
                 #xml格式
                 xtj=xmltojson()

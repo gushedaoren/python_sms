@@ -3,10 +3,12 @@
 #coding=utf-8
 
 #-*- coding: UTF-8 -*-
-from django.http import HttpResponse
 
-from CCPRestSDK import REST
-from rest_framework import generics
+
+from SMS.CCPRestSDK  import REST
+
+from django.http import  HttpResponse
+
 import ConfigParser
 
 #主帐号
@@ -45,15 +47,9 @@ def sendTemplateSMS(request):
     rest.setAppId(appId)
     
     result = rest.sendTemplateSMS(to,datas,tempId)
-    for k,v in result.iteritems(): 
-        
-        if k=='templateSMS' :
-                for k,s in v.iteritems(): 
-                    print '%s:%s' % (k, s)
-                    HttpResponse('{%s:%s}' % (k, s))
-        else:
-            print '%s:%s' % (k, v)
-            return HttpResponse('{%s:%s}' % (k, v));
+
+
+    return  HttpResponse(result)
     
    
 #sendTemplateSMS(手机号码,内容数据,模板Id)
